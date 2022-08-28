@@ -7,14 +7,22 @@ function test() {
 
 function App() {
 
-  let [first, second] = test()
-  console.log(first, second)
-  const [squaresState, setSquaresState] = React.useState<string[]>(['O', 'X', '', '', '', '', '', '', 'X'])
-
+  const [squaresState, setSquaresState] = React.useState<string[]>(['', '', '', '', '', '', '', '', ''])
+  const [x, set_x] = React.useState<boolean>(true) 
+  const set_square = (index: number) => {
+    if (x) {
+      squaresState[index] = 'X'
+      set_x(false)
+    } else{
+      squaresState[index] = 'O'
+      set_x(true)
+    }
+    setSquaresState(squaresState)
+  }
   return (
       <div className="outer-center container">
           <div className="row">
-            <Board squares={squaresState} />
+            <Board squares={squaresState} handler={set_square} />
           </div>
           <div className="game-status row">
               <ul>

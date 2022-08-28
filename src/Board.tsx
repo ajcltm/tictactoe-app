@@ -4,54 +4,21 @@ interface BoardProps {
     squares: string[]
 }
 
-interface BoardStates {
-
-}
-
-class TestReactComponent<T> {
-    props: T;
-
-    constructor(param: T) {
-        this.props = param
-    }
-    render(): string {
-        return "something"
-    }
-}
-
-class MyComponent extends TestReactComponent<BoardProps> {
-    constructor(param: BoardProps) {
-        super(param)
-    }
-
-    render() {
-        return "MyComponent " + this.props.squares[0]
-    }
-}
-
-class FixTypeTest {
-    test(param: number) {
-        console.log(param)
-    }
-}
-
 interface StateProps {
     value: string
+    index : number
 }
 
 function Square(props: StateProps) {
-    return <button className="col square">{props.value}</button>
+    const print = () => console.log(props.index)
+    return <button className="col square" onClick={print}>{props.value}</button>
 }
 
 class Board extends React.Component<BoardProps> {
     renderSquare(i: number) {
-        return <Square value={this.props.squares[i]} />
+        return <Square value={this.props.squares[i]} index={i} />
     }
     render() {
-        
-       // let myComponent = new MyComponent({squares: ['x', 'o']})
-       // console.log(myComponent.render())
-
         return (
             <div id="game" className="container">
                 <div className="row game-row">
